@@ -83,7 +83,7 @@ class FaceEyes extends HTMLElement {
     <div class="container">
       <div class="eye patch"></div>
       <div class="eye"></div>
-      <face-glasses class="sunglasses"></face-glasses>
+      <face-glasses></face-glasses>
     </div>`;
   }
 }

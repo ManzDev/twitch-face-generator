@@ -53,8 +53,16 @@ class FaceNeck extends HTMLElement {
     `;
   }
 
+  setRandom() {
+    const randomTattoo = Math.floor(Math.random() * 5);
+    if (randomTattoo === 0) {
+      this.classList.add("tattoo");
+    }
+  }
+
   connectedCallback() {
     this.render();
+    this.setRandom();
   }
 
   render() {

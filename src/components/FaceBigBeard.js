@@ -20,6 +20,10 @@ class FaceBigBeard extends HTMLElement {
         justify-content: center;
       }
 
+      :host(.none) .container {
+        display: none;
+      }
+
       .beard {
         width: var(--beard-width);
         height: var(--beard-height);
@@ -29,6 +33,8 @@ class FaceBigBeard extends HTMLElement {
         border-radius: 0 0 50px 50px;
         position: relative;
       }
+
+      /* Sideburn */
 
       .beard::before,
       .beard::after {
@@ -51,8 +57,37 @@ class FaceBigBeard extends HTMLElement {
     `;
   }
 
+  setRandom() {
+    const BEARD_SIZE_OPTIONS = [0, 0.4, 0.6, 1, 1.5];
+    const beardMultiplier = BEARD_SIZE_OPTIONS[Math.floor(Math.random() * BEARD_SIZE_OPTIONS.length)];
+    this.style.setProperty("--beard-multiplier", beardMultiplier);
+
+    const BEARD_COLOR_OPTIONS = [
+      "#d7bdff",
+      "#CD5C5C",
+      "#000000",
+      "#3d03a3",
+      "#222222",
+      "#333333",
+      "#DC75CC",
+      "#770000",
+      "#c3b711",
+      "#3d1e09"
+    ];
+    const beardColor = BEARD_COLOR_OPTIONS[Math.floor(Math.random() * BEARD_COLOR_OPTIONS.length)];
+    if (beardColor) {
+      this.style.setProperty("--hair-color", beardColor);
+    }
+
+    const n = Math.floor(Math.random() * 2);
+    if (n === 1) {
+      this.classList.add("none");
+    }
+  }
+
   connectedCallback() {
     this.render();
+    this.setRandom();
   }
 
   render() {

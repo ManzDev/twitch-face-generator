@@ -2,6 +2,7 @@ import "./FaceEyes.js";
 import "./FaceNose.js";
 import "./FaceMouth.js";
 import "./FaceHair.js";
+import "./FaceFrontHair.js";
 import "./FaceNeck.js";
 import "./FaceBigBeard.js";
 import "./FaceEars.js";
@@ -44,6 +45,11 @@ class FaceGenerator extends HTMLElement {
       }
 
       face-hair {
+      }
+
+      face-front-hair {
+        display: flex;
+        transform: translate(0, -260px);
       }
 
       face-eyes {
@@ -91,7 +97,8 @@ class FaceGenerator extends HTMLElement {
         <face-big-beard></face-big-beard>
         <face-mouth></face-mouth>
       </div>
-      <face-neck class="tattoo"></face-neck>
+      <face-front-hair></face-front-hair>
+      <face-neck></face-neck>
     </div>`;
   }
 }

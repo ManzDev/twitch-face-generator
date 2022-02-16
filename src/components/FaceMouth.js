@@ -35,9 +35,23 @@ class FaceMouth extends HTMLElement {
         transition: transform 0.5s;
       }
 
-      .sad.mouth {
+      :host(.surprise) .mouth {
+        width: var(--mouth-height);
+        height: var(--mouth-height);
+        border-radius: 50%;
+      }
+
+      :host(.scared) .mouth {
+        width: var(--mouth-height);
+        height: var(--mouth-height);
+        border-radius: 5%;
+      }
+
+      :host(.sad) .mouth {
         border-radius: var(--mouth-angle) var(--mouth-angle) 0 0;
       }
+
+      /* Teeth */
 
       .teeth {
         height: 15px;
@@ -57,7 +71,9 @@ class FaceMouth extends HTMLElement {
         background-image: linear-gradient(to top, #ddd 25%, #fff 25%);
       }
 
-      .teeth.gold::after {
+      /* Gold Tooth */
+
+      :host(.goldtooth) .top.teeth::after {
         content: "";
         display: inline-block;
         background: linear-gradient(to bottom, #e2ac17 25%, #fbbe15 25%);
@@ -66,9 +82,17 @@ class FaceMouth extends HTMLElement {
         transform: translateX(200%);
       }
 
-      .teeth.bottom.gold::after {
-        background: linear-gradient(to top, #e2ac17 25%, #fbbe15 25%);
+      /* Without teeth */
+
+      :host(.woteeth) .teeth {
+        display: none;
       }
+
+      :host(.wobottomteeth) .top.teeth {
+        display: none;
+      }
+
+      /* Tongue */
 
       .tongue {
         width: 35px;
@@ -76,17 +100,33 @@ class FaceMouth extends HTMLElement {
         border-radius: 20px 20px 0 0;
         background: #eb2760;
         position: absolute;
-        bottom: 0;
-      }
-
-      .hide {
-        opacity: 0;
+        bottom: -3px;
       }
     `;
   }
 
+  setRandom() {
+    const n = Math.floor(Math.random() * 5);
+    if (n === 0) {
+      this.classList.add("goldtooth");
+    }
+
+    const TEETH_OPTIONS = ["", "woteeth", "wobottomteeth"];
+    const teethOption = TEETH_OPTIONS[Math.floor(Math.random() * TEETH_OPTIONS.length)];
+    if (teethOption) {
+      this.classList.add(teethOption);
+    }
+
+    const MOUTH_OPTIONS = ["", "surprise", "sad", "scared"];
+    const mouthOption = MOUTH_OPTIONS[Math.floor(Math.random() * MOUTH_OPTIONS.length)];
+    if (mouthOption) {
+      this.classList.add(mouthOption);
+    }
+  }
+
   connectedCallback() {
     this.render();
+    this.setRandom();
   }
 
   render() {
@@ -94,7 +134,7 @@ class FaceMouth extends HTMLElement {
     <style>${FaceMouth.styles}</style>
     <div class="container">
       <div class="mouth">
-        <div class="top teeth gold"></div>
+        <div class="top teeth"></div>
         <div class="tongue"></div>
         <div class="bottom teeth"></div>
       </div>
