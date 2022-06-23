@@ -1,4 +1,4 @@
-const m=function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const r of t.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&o(r)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerpolicy&&(t.referrerPolicy=e.referrerpolicy),e.crossorigin==="use-credentials"?t.credentials="include":e.crossorigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function o(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}};m();class i extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+const b=function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const a of e)if(a.type==="childList")for(const r of a.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&o(r)}).observe(document,{childList:!0,subtree:!0});function s(e){const a={};return e.integrity&&(a.integrity=e.integrity),e.referrerpolicy&&(a.referrerPolicy=e.referrerpolicy),e.crossorigin==="use-credentials"?a.credentials="include":e.crossorigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function o(e){if(e.ep)return;e.ep=!0;const a=s(e);fetch(e.href,a)}};b();class i extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --crystal-width: var(--height);
         --crystal-height: var(--height);
@@ -65,7 +65,7 @@ const m=function(){const a=document.createElement("link").relList;if(a&&a.suppor
       :host(:is(.glasses, .sunglasses)) .crystal::after {
         right: calc(-1.25 * var(--side-support));
       }
-    `}setRandom(){const a=["","glasses","sunglasses"],s=a[Math.floor(Math.random()*a.length)];s&&this.classList.add(s)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    `}setRandom(){const t=["","glasses","sunglasses"],s=t[Math.floor(Math.random()*t.length)];s&&this.classList.add(s)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
     <style>${i.styles}</style>
     <div class="container">
       <div class="left crystal"></div>
@@ -166,7 +166,7 @@ const m=function(){const a=document.createElement("link").relList;if(a&&a.suppor
     <div class="container">
       <div class="left hole"></div>
       <div class="right hole"></div>
-    </div>`}}customElements.define("face-nose",d);class l extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-nose",d);class c extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --mouth-width: 80px;
         --mouth-height: 40px;
@@ -263,15 +263,15 @@ const m=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         position: absolute;
         bottom: -3px;
       }
-    `}setRandom(){Math.floor(Math.random()*5)===0&&this.classList.add("goldtooth");const s=["","woteeth","wobottomteeth"],o=s[Math.floor(Math.random()*s.length)];o&&this.classList.add(o);const e=["","surprise","sad","scared"],t=e[Math.floor(Math.random()*e.length)];t&&this.classList.add(t)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
-    <style>${l.styles}</style>
+    `}setRandom(){Math.floor(Math.random()*5)===0&&this.classList.add("goldtooth");const s=["","woteeth","wobottomteeth"],o=s[Math.floor(Math.random()*s.length)];o&&this.classList.add(o);const e=["","surprise","sad","scared"],a=e[Math.floor(Math.random()*e.length)];a&&this.classList.add(a)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    <style>${c.styles}</style>
     <div class="container">
       <div class="mouth">
         <div class="top teeth"></div>
         <div class="tongue"></div>
         <div class="bottom teeth"></div>
       </div>
-    </div>`}}customElements.define("face-mouth",l);class c extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-mouth",c);class l extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       /* Default */
 
       :host(.flattop) .container {
@@ -322,11 +322,11 @@ const m=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         height: var(--face-height);
         position: absolute;
       }
-    `}setRandom(){const a=["","military","punky","flattop"],s=a[Math.floor(Math.random()*a.length)];s&&this.classList.add(s)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
-    <style>${c.styles}</style>
+    `}setRandom(){const t=["","military","punky","flattop"],s=t[Math.floor(Math.random()*t.length)];s&&this.classList.add(s)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    <style>${l.styles}</style>
     <div class="container">
 
-    </div>`}}customElements.define("face-hair",c);class h extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-hair",l);class h extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host .container {
         display: none;
       }
@@ -447,7 +447,7 @@ const m=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         right: 0;
         transform: scaleX(-1);
       }
-    `}setRandom(){const a=[0,.4,.6,1,1.5],s=a[Math.floor(Math.random()*a.length)];this.style.setProperty("--beard-multiplier",s);const o=["#d7bdff","#CD5C5C","#000000","#3d03a3","#222222","#333333","#DC75CC","#770000","#c3b711","#3d1e09"],e=o[Math.floor(Math.random()*o.length)];e&&this.style.setProperty("--hair-color",e),Math.floor(Math.random()*2)===1&&this.classList.add("none")}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    `}setRandom(){const t=[0,.4,.6,1,1.5],s=t[Math.floor(Math.random()*t.length)];this.style.setProperty("--beard-multiplier",s);const o=["#d7bdff","#CD5C5C","#000000","#3d03a3","#222222","#333333","#DC75CC","#770000","#c3b711","#3d1e09"],e=o[Math.floor(Math.random()*o.length)];e&&this.style.setProperty("--hair-color",e),Math.floor(Math.random()*2)===1&&this.classList.add("none")}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
     <style>${p.styles}</style>
     <div class="container">
       <div class="beard"></div>
@@ -576,4 +576,4 @@ const m=function(){const a=document.createElement("link").relList;if(a&&a.suppor
       </div>
       <face-front-hair></face-front-hair>
       <face-neck></face-neck>
-    </div>`}}customElements.define("face-generator",g);
+    </div>`}}customElements.define("face-generator",g);const y=document.querySelector(".container"),v=document.querySelector("button");v.addEventListener("click",()=>{document.querySelector("face-generator").remove();const t=document.createElement("face-generator");y.insertAdjacentElement("afterbegin",t)});
