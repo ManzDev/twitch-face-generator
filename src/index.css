@@ -1,6 +1,4 @@
-:root {
-
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Roboto:wght@300&display=swap");
 
 body {
   background: #226;
@@ -10,5 +8,34 @@ body {
 .container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 4em;
   margin-top: 12em;
+}
+
+button {
+  padding: 10px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  background: #1283d1;
+  border: 0;
+  border-radius: 10px;
+  color: #eee;
+  box-shadow: 0 7px 0 #0863a5, 0 8px 3px rgb(0 0 0 / 30%);
+  transition: all 0.25s;
+  cursor: pointer;
+  z-index: 10;
+  position: relative;
+}
+
+button:disabled {
+  opacity: 0.25;
+}
+
+button:active {
+  color: #888;
+  background: #08477a;
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 #0863a5, 0 3px 3px rgb(0 0 0 / 30%);
 }
