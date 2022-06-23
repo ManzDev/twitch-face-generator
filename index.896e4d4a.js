@@ -1,4 +1,4 @@
-const g=function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))p(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const r of t.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&p(r)}).observe(document,{childList:!0,subtree:!0});function u(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerpolicy&&(t.referrerPolicy=e.referrerpolicy),e.crossorigin==="use-credentials"?t.credentials="include":e.crossorigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function p(e){if(e.ep)return;e.ep=!0;const t=u(e);fetch(e.href,t)}};g();class s extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+const m=function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const r of t.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&o(r)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerpolicy&&(t.referrerPolicy=e.referrerpolicy),e.crossorigin==="use-credentials"?t.credentials="include":e.crossorigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function o(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}};m();class i extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --crystal-width: var(--height);
         --crystal-height: var(--height);
@@ -10,14 +10,16 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         height: var(--crystal-height);
       }
 
-      .container {
+      :host(:is(.sunglasses, .glasses)) .container {
         display: flex;
         justify-content: space-around;
         width: 100%;
         transform: translate(0, -15px);
       }
 
-      .crystal {
+      /* GLASSES CRYSTAL */
+
+      :host(:is(.sunglasses, .glasses)) .crystal {
         width: var(--crystal-width);
         height: var(--crystal-height);
         background-image: linear-gradient(45deg, #fff4 30%, #fff8 30% 60%, #fff4 60% 70%, #fff8 70% 100%);
@@ -27,6 +29,8 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         box-shadow: 1px 4px 0 #0002;
       }
 
+      /* SUNGLASSES CRYSTAL */
+
       :host(.sunglasses) .crystal {
         background-image: linear-gradient(145deg, #204a62 30%, #012438 31% 60%, #5188c8 61% 70%, #012438 71% 100%);
         border-radius: 0 0 50% 50% / 0 0 75% 75%;
@@ -34,14 +38,19 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         height: 65%;
       }
 
+      /* height sunglasses handle */
+
       :host(.sunglasses) .crystal::before,
       :host(.sunglasses) .crystal::after {
         transform: translate(0, -300%);
       }
 
-      .crystal::before,
-      .crystal::after {
+      /* glasses handle (common) */
+
+      :host(:is(.glasses, .sunglasses)) .crystal::before,
+      :host(:is(.glasses, .sunglasses)) .crystal::after {
         content: "";
+        background: black;
         display: inline-block;
         border: 3px solid #000;
         position: absolute;
@@ -49,19 +58,19 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         width: var(--side-support);
       }
 
-      .crystal::before {
+      :host(:is(.glasses, .sunglasses)) .crystal::before {
         left: calc(-1.25 * var(--side-support));
       }
 
-      .crystal::after {
+      :host(:is(.glasses, .sunglasses)) .crystal::after {
         right: calc(-1.25 * var(--side-support));
       }
-    `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${s.styles}</style>
+    `}setRandom(){const a=["","glasses","sunglasses"],s=a[Math.floor(Math.random()*a.length)];s&&this.classList.add(s)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    <style>${i.styles}</style>
     <div class="container">
       <div class="left crystal"></div>
       <div class="right crystal"></div>
-    </div>`}}customElements.define("face-glasses",s);class o extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-glasses",i);class n extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --width: 190px;
         --height: 75px;
@@ -125,12 +134,12 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         position: absolute;
       }
     `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${o.styles}</style>
+    <style>${n.styles}</style>
     <div class="container">
       <div class="eye patch"></div>
       <div class="eye"></div>
-      <face-glasses class="sunglasses"></face-glasses>
-    </div>`}}customElements.define("face-eyes",o);class i extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+      <face-glasses></face-glasses>
+    </div>`}}customElements.define("face-eyes",n);class d extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --nose-width: 35px;
         --nose-hole-size: 10px;
@@ -153,11 +162,11 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         border-radius: 50%;
       }
     `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${i.styles}</style>
+    <style>${d.styles}</style>
     <div class="container">
       <div class="left hole"></div>
       <div class="right hole"></div>
-    </div>`}}customElements.define("face-nose",i);class n extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-nose",d);class l extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --mouth-width: 80px;
         --mouth-height: 40px;
@@ -187,9 +196,23 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         transition: transform 0.5s;
       }
 
-      .sad.mouth {
+      :host(.surprise) .mouth {
+        width: var(--mouth-height);
+        height: var(--mouth-height);
+        border-radius: 50%;
+      }
+
+      :host(.scared) .mouth {
+        width: var(--mouth-height);
+        height: var(--mouth-height);
+        border-radius: 5%;
+      }
+
+      :host(.sad) .mouth {
         border-radius: var(--mouth-angle) var(--mouth-angle) 0 0;
       }
+
+      /* Teeth */
 
       .teeth {
         height: 15px;
@@ -209,7 +232,9 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         background-image: linear-gradient(to top, #ddd 25%, #fff 25%);
       }
 
-      .teeth.gold::after {
+      /* Gold Tooth */
+
+      :host(.goldtooth) .top.teeth::after {
         content: "";
         display: inline-block;
         background: linear-gradient(to bottom, #e2ac17 25%, #fbbe15 25%);
@@ -218,9 +243,17 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         transform: translateX(200%);
       }
 
-      .teeth.bottom.gold::after {
-        background: linear-gradient(to top, #e2ac17 25%, #fbbe15 25%);
+      /* Without teeth */
+
+      :host(.woteeth) .teeth {
+        display: none;
       }
+
+      :host(.wobottomteeth) .top.teeth {
+        display: none;
+      }
+
+      /* Tongue */
 
       .tongue {
         width: 35px;
@@ -228,37 +261,94 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         border-radius: 20px 20px 0 0;
         background: #eb2760;
         position: absolute;
-        bottom: 0;
+        bottom: -3px;
       }
-
-      .hide {
-        opacity: 0;
-      }
-    `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${n.styles}</style>
+    `}setRandom(){Math.floor(Math.random()*5)===0&&this.classList.add("goldtooth");const s=["","woteeth","wobottomteeth"],o=s[Math.floor(Math.random()*s.length)];o&&this.classList.add(o);const e=["","surprise","sad","scared"],t=e[Math.floor(Math.random()*e.length)];t&&this.classList.add(t)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    <style>${l.styles}</style>
     <div class="container">
       <div class="mouth">
-        <div class="top teeth gold"></div>
+        <div class="top teeth"></div>
         <div class="tongue"></div>
         <div class="bottom teeth"></div>
       </div>
-    </div>`}}customElements.define("face-mouth",n);class d extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
-      :host {
+    </div>`}}customElements.define("face-mouth",l);class c extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+      /* Default */
 
+      :host(.flattop) .container {
+        background: var(--hair-color);
+        transform: translate(0, -50%);
+      }
+
+      /* Punky */
+
+      :host(.punky) {
+        --hair-color: linear-gradient(#0a0, #030);
+
+        display: flex;
+        justify-content: center;
+        transform: translate(0, -50%);
+      }
+
+      :host(.punky) .container {
+        background: var(--hair-color);
+        width: calc(var(--face-width) / 5);
+        transform: translate(0, -50%);
+      }
+
+      /* Military */
+
+      :host(.military) .container {
+        height: calc(var(--face-height) * 1.10);
+        background: var(--hair-color);
+        transform: translateY(-15%);
+        border-radius: 50% 50% 0 0 / 25% 25% 0 0;
+        overflow: hidden;
+      }
+
+      :host(.military.goldbang) .container::after {
+        content: "";
+        background: #770;
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 150px;
+        transform: translate(375%, 0%);
+      }
+
+      /* Default */
+
+      .container {
+        width: var(--face-width);
+        height: var(--face-height);
+        position: absolute;
+      }
+    `}setRandom(){const a=["","military","punky","flattop"],s=a[Math.floor(Math.random()*a.length)];s&&this.classList.add(s)}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    <style>${c.styles}</style>
+    <div class="container">
+
+    </div>`}}customElements.define("face-hair",c);class h extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+      :host .container {
+        display: none;
+      }
+
+      :host(.bang) .container {
+        display: block;
+        width: calc(var(--face-width) / 2);
+        height: calc(var(--face-height) / 5);
+        border-radius: 50% 0 50% 0 / 75% 0 75% 0;
       }
 
       .container {
         width: var(--face-width);
         height: var(--face-height);
-        transform: translate(0, -50%);
         background: var(--hair-color);
         position: absolute;
       }
     `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${d.styles}</style>
+    <style>${h.styles}</style>
     <div class="container">
 
-    </div>`}}customElements.define("face-hair",d);class c extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-front-hair",h);class f extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --neck-width: calc(var(--face-width) * 0.5);
       }
@@ -303,12 +393,12 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         height: 40px;
         border-radius: 5px 5px 0 0;
       }
-    `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${c.styles}</style>
+    `}setRandom(){Math.floor(Math.random()*5)===0&&this.classList.add("tattoo")}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    <style>${f.styles}</style>
     <div class="container">
       <div class="neck"></div>
       <div class="body"></div>
-    </div>`}}customElements.define("face-neck",c);class l extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-neck",f);class p extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --beard-width: calc(var(--face-width) * 1.05);
         --beard-multiplier: 0.5;
@@ -323,6 +413,10 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         justify-content: center;
       }
 
+      :host(.none) .container {
+        display: none;
+      }
+
       .beard {
         width: var(--beard-width);
         height: var(--beard-height);
@@ -332,6 +426,8 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         border-radius: 0 0 50px 50px;
         position: relative;
       }
+
+      /* Sideburn */
 
       .beard::before,
       .beard::after {
@@ -351,11 +447,11 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         right: 0;
         transform: scaleX(-1);
       }
-    `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${l.styles}</style>
+    `}setRandom(){const a=[0,.4,.6,1,1.5],s=a[Math.floor(Math.random()*a.length)];this.style.setProperty("--beard-multiplier",s);const o=["#d7bdff","#CD5C5C","#000000","#3d03a3","#222222","#333333","#DC75CC","#770000","#c3b711","#3d1e09"],e=o[Math.floor(Math.random()*o.length)];e&&this.style.setProperty("--hair-color",e),Math.floor(Math.random()*2)===1&&this.classList.add("none")}connectedCallback(){this.render(),this.setRandom()}render(){this.shadowRoot.innerHTML=`
+    <style>${p.styles}</style>
     <div class="container">
       <div class="beard"></div>
-    </div>`}}customElements.define("face-big-beard",l);class h extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-big-beard",p);class u extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         position: relative;
       }
@@ -399,11 +495,11 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         transform: translate(10px, 40px);
       }
     `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${h.styles}</style>
+    <style>${u.styles}</style>
     <div class="container">
       <div class="left ear"></div>
       <div class="right ear ring"></div>
-    </div>`}}customElements.define("face-ears",h);class f extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
+    </div>`}}customElements.define("face-ears",u);class g extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}static get styles(){return`
       :host {
         --hair-color: #000; /* #ee4261;  /* Dolce color */
         --skin-color: #f69779;
@@ -436,6 +532,11 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
       face-hair {
       }
 
+      face-front-hair {
+        display: flex;
+        transform: translate(0, -260px);
+      }
+
       face-eyes {
         display: flex;
         transform: translate(0, 60px);
@@ -463,7 +564,7 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         transform: translate(0, 65px);
       }
     `}connectedCallback(){this.render()}render(){this.shadowRoot.innerHTML=`
-    <style>${f.styles}</style>
+    <style>${g.styles}</style>
     <div class="container">
       <face-hair></face-hair>
       <face-ears></face-ears>
@@ -473,5 +574,6 @@ const g=function(){const a=document.createElement("link").relList;if(a&&a.suppor
         <face-big-beard></face-big-beard>
         <face-mouth></face-mouth>
       </div>
-      <face-neck class="tattoo"></face-neck>
-    </div>`}}customElements.define("face-generator",f);
+      <face-front-hair></face-front-hair>
+      <face-neck></face-neck>
+    </div>`}}customElements.define("face-generator",g);
